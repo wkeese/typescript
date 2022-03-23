@@ -30,7 +30,7 @@ function prop<T, K extends keyof T>(obj: T, key: K) {
 prop({a: 1, b: 2, c: 3}, "c");
 
 type keys = "a" | "b" | "c";
-let key: keys
+let key: keys = "a";
 prop({a: 1, b: 2, c: 3}, key);
 
 // --- Builtin Classes
@@ -65,10 +65,12 @@ class Stack<T> implements StackInterface<T> {
 
     }
     pop(): T {
-        if (this.elements.length == 0) {
+        const elem = this.elements.pop();
+        if (typeof elem === "undefined") {
             throw new Error('The stack is empty!');
         }
-        return this.elements.pop();
+
+        return elem;
     }
 }
 let numberStack = new Stack<number>(5);
